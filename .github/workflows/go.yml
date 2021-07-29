@@ -26,17 +26,17 @@ jobs:
     - name: Build
       run: make
 
-  publish:
-    name: Create release-artifacts
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, macos-latest]
-    runs-on: {{matrix.platform}}
-    steps:
-      - name: Upload the artifacts
-        uses: skx/github-action-publish-binaries@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: '{{matrix.platform}}-*'
+  # publish:
+  #   name: Create release-artifacts
+  #   strategy:
+  #     matrix:
+  #       platform: [ubuntu-latest, macos-latest]
+  #   runs-on: {{matrix.platform}}
+  #   steps:
+  #     - name: Upload the artifacts
+  #       uses: skx/github-action-publish-binaries@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         args: '{{matrix.platform}}-*'
 
