@@ -112,6 +112,8 @@ f1mb62jel5pe2ni4lmaqgsppskdegtscqwvubpx6i  0 FIL    0
 ```
 ### 创建新地址
 
+不带BLS选项生成的地址，使用SECP256-K1生成的地址，与以太坊签名算法兼容。  
+与外部交易所和钱包之间，最好采用这种形式，通用和兼容性较好。  
 ```
 $ firefly-wallet new-address
 请输入密码(长度至少6位):******
@@ -119,6 +121,13 @@ f1d5rhpq5icldkw4djdis5oufefutgyqkqunmb2oy
 
 ```
 
+带上BLS选项生成的地址，使用BLS签名算法生成的地址，可以用于矿工worker key。  
+
+```
+$ firefly-wallet new-address --bls
+请输入密码(长度至少6位):******
+f3wzaczkndddpf55nlmkyni5q3mqgkgycvj6hnqp2b27zo2yvtbl27ru7dykghi63clxtrv4dsvzvhrmb65coq
+```
 ### 从矿工帐号提现
 
 ```
@@ -156,4 +165,20 @@ $ firefly-wallet   import
 ```
 $ firefly-wallet set-owner --really-do-it f02420 f1xxxxxnew  f1xxxxxold
 $ firefly-wallet set-owner --really-do-it f02420 f1xxxxxnew  f1xxxxxnew
+```
+
+### 更换worker key
+
+worker key必须是BLS地址，参见前述地址生成。
+更换worker key后，消息上链7.5小时后生效。  
+
+*注意*：
+- 需要在生效前，加入到具备签名能力的钱包服务中,否则会导致挖矿出块失败。  
+
+```
+$ firefly-wallet  propose-change-worker  --really-do-it  f02420  f3qbjatohy7evsb4hi7qjbyig6egpclztrgyhc25vaqdvtdhxip3aqkzfhtw57k5r2nc6tobves66qdak75msa
+请输入密码(长度至少6位):******
+Propose Message CID: bafy2bzaceazzo2hhwhg2amfcmjhtlcd5etg5pwlcetyjups4iyeolbjqaewvs
+Worker key change to f3qbjatohy7evsb4hi7qjbyig6egpclztrgyhc25vaqdvtdhxip3aqkzfhtw57k5r2nc6tobves66qdak75msa successfully proposed.
+Call 'confirm-change-worker' at or after height 1010006 to complete.
 ```
