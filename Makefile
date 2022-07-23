@@ -11,4 +11,5 @@ clean:
 
 
 firefly-wallet: depend
+	go mod tidy
 	go build ./
